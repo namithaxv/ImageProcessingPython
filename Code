@@ -1,8 +1,3 @@
-"""
-DSC 20 Project
-Name(s): Namitha Vishnupad, Christine Law
-PID(s):  A17371450, A16823948
-"""
 
 import numpy as np
 import os
