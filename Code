@@ -16,7 +16,6 @@ def img_read_helper(path):
     img = Image.open(path).convert("RGB")
     # Convert to numpy array and then to a list
     matrix = np.array(img).tolist()
-    # Use student's code to create an RGBImage object
     return RGBImage(matrix)
 
 
@@ -66,7 +65,6 @@ class RGBImage:
         >>> img.num_cols
         2
         """
-        # YOUR CODE GOES HERE #
 
         # Raise exceptions here
         # Check if pixels is a list and isn't empty
@@ -108,7 +106,6 @@ class RGBImage:
         >>> img.size()
         (1, 2)
         """
-        # YOUR CODE GOES HERE #
         return (self.num_rows, self.num_cols)
 
     def get_pixels(self): #passes terminal tests
@@ -132,7 +129,6 @@ class RGBImage:
         >>> id(pixels[0][0]) != id(img_pixels[0][0]) # Check pixel
         True
         """
-        # YOUR CODE GOES HERE #
         return [[[pixel for pixel in channel] \
         for channel in row] for row in self.pixels]
 
@@ -152,7 +148,6 @@ class RGBImage:
         >>> id(img_copy) != id(img)
         True
         """
-        # YOUR CODE GOES HERE #
         copied = self.get_pixels()
         return RGBImage(copied)
 
@@ -177,7 +172,6 @@ class RGBImage:
         >>> img.get_pixel(0, 0)
         (255, 255, 255)
         """
-        # YOUR CODE GOES HERE #
         # Check that row and col are integers
         if not isinstance(row, int) or not isinstance(col, int):
             raise TypeError()
@@ -211,7 +205,6 @@ class RGBImage:
         >>> img.pixels
         [[[255, 0, 0], [0, 0, 0]]]
         """
-        # YOUR CODE GOES HERE #
         # tested all exceptions
         
         # Check if row and col are integers
@@ -257,7 +250,6 @@ class ImageProcessingTemplate:
         >>> img_proc.cost
         0
         """
-        # YOUR CODE GOES HERE #
         self.cost = 0
 
     def get_cost(self): #passes terminal tests
@@ -270,7 +262,6 @@ class ImageProcessingTemplate:
         >>> img_proc.get_cost()
         50
         """
-        # YOUR CODE GOES HERE #
         return self.cost
 
     def negate(self, image):
@@ -302,7 +293,6 @@ class ImageProcessingTemplate:
         True
         >>> img_save_helper('img/out/gradient_16x16_negate.png', img_negate)# 6
         """
-        # YOUR CODE GOES HERE #
         # Retrieve pixel matrix
         pixels = image.get_pixels()
         max_value = 255
@@ -331,7 +321,6 @@ class ImageProcessingTemplate:
         True
         >>> img_save_helper('img/out/gradient_16x16_gray.png', img_gray)
         """
-        # YOUR CODE GOES HERE #
         pixels = image.get_pixels()
         gray_pixels = [[[sum(pixel)//3] * 3 for pixel in row] for row in pixels]
         grayed_image = RGBImage(gray_pixels)
@@ -351,7 +340,6 @@ class ImageProcessingTemplate:
         True
         >>> img_save_helper('img/out/gradient_16x16_rotate.png', img_rotate)
         """
-        # YOUR CODE GOES HERE #
         # Get new instance of og matrix
         pixels = image.get_pixels()
         transposed_pixels = [row[::-1] for row in pixels[::-1]]
@@ -368,7 +356,6 @@ class ImageProcessingTemplate:
         >>> img_proc.get_average_brightness(img)
         133
         """
-        # YOUR CODE GOES HERE #
         # pixels = image.get_pixels()
         # total_brightness = sum([sum([max(pixel) for pixel in row]) for row in pixels])
         # average_brightness = total_brightness // (image.num_rows + image.num_cols)
@@ -392,7 +379,6 @@ class ImageProcessingTemplate:
         True
         >>> img_save_helper('img/out/gradient_16x16_adjusted.png', img_adjust)
         """
-        # YOUR CODE GOES HERE #
         bound_value = 255
         
         # Check that intensity is an integer
@@ -425,7 +411,6 @@ class ImageProcessingTemplate:
         True
         >>> img_save_helper('img/out/gradient_16x16_blur.png', img_adjust)
         """
-        # YOUR CODE GOES HERE #
         pixels = image.get_pixels()
         blurred_image = [[pixel for pixel in row] for row in pixels]
 
@@ -467,7 +452,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         >>> img_proc.cost
         0
         """
-        # YOUR CODE GOES HERE #
         super().__init__()
         self.cost = 0
         self.free = 0
@@ -491,7 +475,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         >>> img_negate.pixels == img_exp.pixels # Check negate output
         True
         """
-        # YOUR CODE GOES HERE #
         negated_image = super().negate(image)  
         if self.free > 0:
             self.cost += 0
@@ -505,7 +488,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         Returns a grayscale copy of the given image
 
         """
-        # YOUR CODE GOES HERE #
         grayed_img = super().grayscale(image)
         if self.free > 0:
             self.cost += 0
@@ -518,7 +500,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         """
         Returns a rotated version of the given image
         """
-        # YOUR CODE GOES HERE #
         rotated_img = super().rotate_180(image)
         if self.free > 0:
             self.cost += 0
@@ -532,7 +513,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         """
         Returns a new image with adjusted brightness level
         """
-        # YOUR CODE GOES HERE #
         adjusted_img = super().adjust_brightness(image)
         if self.free > 0:
             self.cost += 0
@@ -546,7 +526,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         """
         Returns a new image with the pixels blurred
         """
-        # YOUR CODE GOES HERE #
         blurred_img = super().blur(image)
         if self.free > 0:
             self.cost += 0
@@ -569,7 +548,6 @@ class StandardImageProcessing(ImageProcessingTemplate):
         >>> img_proc.get_cost()
         0
         """
-        # YOUR CODE GOES HERE #
         if amount <= 0:
             raise ValueError()
         if not isinstance(amount,int):
@@ -593,7 +571,6 @@ class PremiumImageProcessing(ImageProcessingTemplate):
         >>> img_proc.get_cost()
         50
         """
-        # YOUR CODE GOES HERE #
         super().__init__()
         self.cost = 50
 
@@ -613,7 +590,6 @@ class PremiumImageProcessing(ImageProcessingTemplate):
         True
         >>> img_save_helper('img/out/square_16x16_chroma.png', img_chroma)
         """
-        # YOUR CODE GOES HERE #
 
         if not isinstance(chroma_image, RGBImage) or not \
             isinstance(background_image, RGBImage):
@@ -667,7 +643,6 @@ class PremiumImageProcessing(ImageProcessingTemplate):
         True
         >>> img_save_helper('img/out/square_16x16_sticker.png', img_combined)
         """
-        # YOUR CODE GOES HERE #
         # Checks that sticker_image and background_image are RGBImage instances
         if not isinstance(sticker_image, RGBImage) or not \
         isinstance(background_image, RGBImage):
@@ -720,7 +695,6 @@ class PremiumImageProcessing(ImageProcessingTemplate):
         True
         >>> img_save_helper('img/out/gradient_16x16_edge.png', img_edge)
         """
-        # YOUR CODE GOES HERE #
 
         # Create a new image to store the result
         edge_img = image.get_pixels()
@@ -792,7 +766,6 @@ class ImageKNNClassifier:
         """
         Creates a new KNN classifier object
         """
-        # YOUR CODE GOES HERE #
         self.k_neighbors = k_neighbors
         self.data = []
 
@@ -801,7 +774,6 @@ class ImageKNNClassifier:
         """
         Stores the given set of data and labels for later
         """
-        # YOUR CODE GOES HERE #
         if len(data) < self.k_neighbors:
             raise ValueError()
         self.data = data
@@ -817,7 +789,6 @@ class ImageKNNClassifier:
         >>> knn.distance(img1, img2)
         15946.312896716909
         """
-        # YOUR CODE GOES HERE #
 
         # Check if both images are RGBImage instances
         if not isinstance(image1, RGBImage) or not isinstance(image2, RGBImage):
@@ -845,7 +816,6 @@ class ImageKNNClassifier:
         >>> knn.vote(['label1', 'label2', 'label2', 'label2', 'label1'])
         'label2'
         """
-        # YOUR CODE GOES HERE #
         if not candidates:
             return None
 
@@ -866,7 +836,6 @@ class ImageKNNClassifier:
 
         The test for this method is located in the knn_tests method below
         """
-        # YOUR CODE GOES HERE #
         if not self.data:
             raise ValueError()
 
